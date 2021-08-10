@@ -55,6 +55,6 @@ plt.savefig('model_results.png', dpi=120)
 
 # Write metrics to file
 with open('metrics.txt', 'w') as outfile:
-    outfile.write(f'\nAccuracy score = {round(accuracy_score(y_test, svc_clf.predict(X_test)), 2)}')
-    outfile.write(f'\nROC AUC score = {round(roc_auc_score(y_test, svc_clf.predict_proba(X_test)[:, 1]), 2)}')
-    outfile.write(f'\nConfusion Matrix = {round(confusion_matrix(y_test, svc_clf.predict(X_test)), 2)}')
+    outfile.write(f'\nAccuracy score = {round(accuracy_score(y_test, svc_clf.predict(X_test)),2)}')
+    outfile.write(f'\nROC AUC score = {round(roc_auc_score(y_test, svc_clf.predict_proba(X_test)[:, 1]),2)}')
+    outfile.write(f'\nConfusion Matrix = {round(confusion_matrix(y_test, svc_clf.predict(X_test)),2)}')
