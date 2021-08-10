@@ -13,12 +13,12 @@ df['target'] = data.target # adding the target attribute into the dataframe
 print(df.head())
 	
 sns.pairplot(df, hue= 'target', vars= ['mean radius', 'mean texture', 'mean perimeter']) # visualize the relationship between the first 3 features
-plt.show()
+#plt.show()
 plt.savefig('pairplot.png', dpi=120)
 	
 plt.figure(figsize=(25,12))
 sns.heatmap(df.corr(), annot=True)
-plt.show()
+#plt.show()
 plt.savefig('heatmap.png', dpi=120)
 	
 X = df.drop(['target'], axis= 1) # features
