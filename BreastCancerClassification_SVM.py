@@ -37,9 +37,7 @@ svc_clf = SVC(kernel= "linear",probability= True) #creating SVC model with linea
 svc_clf.fit(X_train, y_train) # training SVC model
 	
 print("Confusion matrix: " + '\n' + str(confusion_matrix(y_test, svc_clf.predict(X_test)))) #confusion matrix
-	
 print("Accuracy score: " + str(accuracy_score(y_test, svc_clf.predict(X_test)))) #accuracy score
-	
 print("ROC AUC score: " + str(roc_auc_score(y_test, svc_clf.predict_proba(X_test)[:, 1]))) # ROC (AUC) score
 	
 #plotting the SVC model’s ROC curve
