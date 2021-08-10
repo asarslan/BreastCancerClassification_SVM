@@ -17,8 +17,14 @@ jobs:
           cat metrics.txt >> report.md
           
           echo "\n## Model Performance" >> report.md
-          echo "ROC CURVE." >> report.md
           
+          echo "\nThe relationship between features (first 3 variables)" >> report.md
+          cml-publish pairplot.png --md >> report.md
+          
+          echo "\nHeatmap" >> report.md
+          cml-publish heatmap.png --md >> report.md
+          
+          echo "\nROC CURVE." >> report.md          
           cml-publish model_results.png --md >> report.md
-          
+         
           cml-send-comment report.md
