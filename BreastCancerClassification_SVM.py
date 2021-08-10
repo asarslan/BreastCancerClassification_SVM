@@ -51,6 +51,7 @@ plt.xlim([-0.02, 1])
 plt.ylim([0, 1.02])
 plt.legend(loc= "lower right")
 plt.show()
+plt.savefig('model_results.png', dpi=120)
 
 # Write metrics to file
 with open('metrics.txt', 'w') as outfile:
