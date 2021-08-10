@@ -14,10 +14,12 @@ print(df.head())
 	
 sns.pairplot(df, hue= 'target', vars= ['mean radius', 'mean texture', 'mean perimeter']) # visualize the relationship between the first 3 features
 plt.show()
+plt.savefig('pairplot.png', dpi=120)
 	
 plt.figure(figsize=(25,12))
 sns.heatmap(df.corr(), annot=True)
 plt.show()
+plt.savefig('heatmap.png', dpi=120)
 	
 X = df.drop(['target'], axis= 1) # features
 print(X.head())
@@ -50,9 +52,11 @@ plt.title('ROC Curve')
 plt.xlim([-0.02, 1])
 plt.ylim([0, 1.02])
 plt.legend(loc= "lower right")
-plt.show()
+#plt.show()
 plt.savefig('model_results.png', dpi=120)
 
 # Write metrics to file
 with open('metrics.txt', 'w') as outfile:
-    outfile.write(f'\nAccuracy score = {accuracy_score(y_test, svc_clf.predict(X_test))}, ROC AUC score = {roc_auc_score(y_test, svc_clf.predict_proba(X_test)[:, 1])}.')
+    outfile.write(f'\nAccuracy score = {round(accuracy_score(y_test, svc_clf.predict(X_test)), 2)}')
+    outfile.write(f'\nROC AUC score = {round(roc_auc_score(y_test, svc_clf.predict_proba(X_test)[:, 1]), 2)}')
+    outfile.write(f'\nConfusion Matrix = {round(confusion_matrix(y_test, svc_clf.predict(X_test)), 2)}')
