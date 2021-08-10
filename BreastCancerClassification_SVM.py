@@ -51,3 +51,7 @@ plt.xlim([-0.02, 1])
 plt.ylim([0, 1.02])
 plt.legend(loc= "lower right")
 plt.show()
+
+# Write metrics to file
+with open('metrics.txt', 'w') as outfile:
+    outfile.write(f'\nAccuracy score = {accuracy_score(y_test, svc_clf.predict(X_test))}, ROC AUC score = {roc_auc_score(y_test, svc_clf.predict_proba(X_test)[:, 1])}.')
