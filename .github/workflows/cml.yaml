@@ -16,4 +16,9 @@ jobs:
           echo "## Model metrics" > report.md
           cat metrics.txt >> report.md
           
+          echo "\n## Model Performance" >> report.md
+          echo "ROC CURVE." >> report.md
+          
+          cml-publish model_results.png --md >> report.md
+          
           cml-send-comment report.md
