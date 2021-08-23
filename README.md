@@ -24,7 +24,9 @@ In this example, I am using a Breast Cancer Dataset available in sklearn to clas
 ### Model metrics
 
 Accuracy score = 0.956140350877193
+
 ROC AUC score = 0.9758597883597884
+
 Confusion Matrix = 
 [[37  5]
  [ 0 72]]
