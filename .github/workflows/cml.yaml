@@ -1,0 +1,31 @@
+name: bcc-svm-mlops-example
+on: [push]
+jobs:
+  run:
+    runs-on: [ubuntu-latest]
+    container: docker://dvcorg/cml-py3:latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Train model'
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+         
+          pip install -r requirements.txt
+          python BreastCancerClassification_SVM.py 
+          
+          echo "## Model metrics" > report.md
+          cat metrics.txt >> report.md
+          
+          echo "\n## Model Performance" >> report.md
+          
+          echo "\nThe relationship between features (first 3 variables)" >> report.md
+          cml-publish pairplot.png --md >> report.md
+          
+          echo "\nHeatmap" >> report.md
+          cml-publish heatmap.png --md >> report.md
+          
+          echo "\nROC CURVE." >> report.md          
+          cml-publish model_results.png --md >> report.md
+         
+          cml-send-comment report.md

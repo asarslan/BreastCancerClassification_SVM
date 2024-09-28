@@ -13,11 +13,13 @@ df['target'] = data.target # adding the target attribute into the dataframe
 print(df.head())
 	
 sns.pairplot(df, hue= 'target', vars= ['mean radius', 'mean texture', 'mean perimeter']) # visualize the relationship between the first 3 features
-plt.show()
+#plt.show()
+plt.savefig('pairplot.png', dpi=120)
 	
 plt.figure(figsize=(25,12))
 sns.heatmap(df.corr(), annot=True)
-plt.show()
+#plt.show()
+plt.savefig('heatmap.png', dpi=120)
 	
 X = df.drop(['target'], axis= 1) # features
 print(X.head())
@@ -35,9 +37,7 @@ svc_clf = SVC(kernel= "linear",probability= True) #creating SVC model with linea
 svc_clf.fit(X_train, y_train) # training SVC model
 	
 print("Confusion matrix: " + '\n' + str(confusion_matrix(y_test, svc_clf.predict(X_test)))) #confusion matrix
-	
 print("Accuracy score: " + str(accuracy_score(y_test, svc_clf.predict(X_test)))) #accuracy score
-	
 print("ROC AUC score: " + str(roc_auc_score(y_test, svc_clf.predict_proba(X_test)[:, 1]))) # ROC (AUC) score
 	
 #plotting the SVC model’s ROC curve
@@ -50,4 +50,11 @@ plt.title('ROC Curve')
 plt.xlim([-0.02, 1])
 plt.ylim([0, 1.02])
 plt.legend(loc= "lower right")
-plt.show()
+#plt.show()
+plt.savefig('model_results.png', dpi=120)
+
+# Write metrics to file
+with open('metrics.txt', 'w') as outfile:
+    outfile.write(f'\nAccuracy score = {accuracy_score(y_test, svc_clf.predict(X_test))}')
+    outfile.write(f'\nROC AUC score = {roc_auc_score(y_test, svc_clf.predict_proba(X_test)[:, 1])}')
+    outfile.write(f'\nConfusion Matrix = {confusion_matrix(y_test, svc_clf.predict(X_test))}')
